@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Access from '../pages/access/Access';
-import Home from '../pages/home/Home';
+import { Access, Home } from '../pages';
 
 function AppRoutes(): JSX.Element {
 	return (

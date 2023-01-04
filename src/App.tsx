@@ -1,5 +1,4 @@
-import lightTheme from './configs/themes/lightTheme';
-import darkTheme from './configs/themes/darkTheme';
+import { lightTheme, darkTheme } from './configs/themes';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import AppRoutes from './routes/Router';
 

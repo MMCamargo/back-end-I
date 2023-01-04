@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Container, Paper } from '@mui/material';
-import ConditionallyRender from './components/conditionally-render/ConditionallyRender';
-import Register from './components/register/Register';
-import Login from './components/login/Login';
+import { ConditionallyRender, Register, Login } from './components';
 
 function Access(): JSX.Element {
 	const [isRegistering, setIsRegistering] = useState(false);

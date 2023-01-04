@@ -1,11 +1,11 @@
 import { createTheme } from '@mui/material';
-import { blueGrey } from '@mui/material/colors';
+import { indigo } from '@mui/material/colors';
 
 const darkTheme = createTheme({
 	palette: {
 		mode: 'dark',
 		primary: {
-			main: blueGrey[500],
+			main: indigo[500],
 		},
 	},
 	breakpoints: {

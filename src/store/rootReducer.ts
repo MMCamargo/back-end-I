@@ -1,6 +1,9 @@
+import { configsSlice } from './modules';
 import { combineReducers } from '@reduxjs/toolkit';
 
-const reducers = {};
+const reducers = {
+	configsSlice,
+};
 
 const rootReducer = combineReducers({
 	...reducers,

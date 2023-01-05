@@ -1,10 +1,13 @@
+import { useAppDispatch } from '../../../shared/hooks';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { IUser, IDefaultResponse } from '../../../shared/interfaces';
 import { doPost } from '../../../services';
+import { setLoggedUser } from '../../../store/modules/configsSlice';
 
 function useLoginForm() {
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const { values, resetForm, handleChange, handleSubmit } = useFormik({
@@ -12,7 +15,7 @@ function useLoginForm() {
 			email: '',
 			password: '',
 		},
-		async onSubmit(values, formikHelpers) {
+		async onSubmit(values) {
 			const { email, password } = values;
 			const data: Partial<IUser> = { email, password };
 
@@ -35,6 +38,7 @@ function useLoginForm() {
 				}
 			}
 
+			dispatch(setLoggedUser(data));
 			resetForm();
 			navigate('/home');
 		},

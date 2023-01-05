@@ -1,8 +1,19 @@
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { Container, Paper } from '@mui/material';
 import { ConditionallyRender, Register, Login } from './components';
 
 function Access(): JSX.Element {
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const loggedUser = window.localStorage.getItem('loggedUser');
+
+		if (loggedUser) {
+			navigate('/home');
+		}
+	}, []);
+
 	const [isRegistering, setIsRegistering] = useState(false);
 
 	return (

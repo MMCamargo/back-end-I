@@ -25,7 +25,7 @@ function useRegisterForm(
 			confirmPassword: '',
 		},
 		validationSchema: registerSchema,
-		async onSubmit(values, formikHelpers) {
+		async onSubmit(values) {
 			const { firstName, lastName, email, password } = values;
 			const data: Partial<IUser> = {
 				firstName,

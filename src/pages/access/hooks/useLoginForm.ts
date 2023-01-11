@@ -38,7 +38,7 @@ function useLoginForm() {
 				}
 			}
 
-			dispatch(setLoggedUser(data));
+			dispatch(setLoggedUser(response.data));
 			resetForm();
 			navigate('/home');
 		},

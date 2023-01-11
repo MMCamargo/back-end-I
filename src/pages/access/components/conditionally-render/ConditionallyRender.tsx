@@ -6,11 +6,11 @@ interface IConditionallyRenderProps {
 	elseShow?: JSX.Element | RenderFunc;
 }
 
-function ConditionallyRender({
+const ConditionallyRender = ({
 	condition,
 	show,
 	elseShow,
-}: IConditionallyRenderProps): JSX.Element {
+}: IConditionallyRenderProps) => {
 	const isFunc = (param: JSX.Element | RenderFunc) => {
 		return typeof param === 'function';
 	};
@@ -46,6 +46,6 @@ function ConditionallyRender({
 	}
 
 	return <></>;
-}
+};
 
 export default ConditionallyRender;

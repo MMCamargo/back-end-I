@@ -2,9 +2,7 @@ import { useLoginForm } from '../../hooks';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import { ConditionallyRender } from '..';
 
-function Login(
-	setState: React.Dispatch<React.SetStateAction<boolean>>
-): JSX.Element {
+const Login = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 	const {
 		values,
 		resetForm,
@@ -78,6 +76,6 @@ function Login(
 			</Button>
 		</Box>
 	);
-}
+};
 
 export default Login;

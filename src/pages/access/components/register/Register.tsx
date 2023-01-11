@@ -2,9 +2,7 @@ import { useRegisterForm } from '../../hooks';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import { ConditionallyRender } from '..';
 
-function Register(
-	setState: React.Dispatch<React.SetStateAction<boolean>>
-): JSX.Element {
+const Register = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 	const {
 		values,
 		errors,
@@ -129,6 +127,6 @@ function Register(
 			</Button>
 		</Box>
 	);
-}
+};
 
 export default Register;

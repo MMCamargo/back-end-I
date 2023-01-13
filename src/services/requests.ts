@@ -13,4 +13,16 @@ const doPost = async (url: string, data: object) => {
 	}
 };
 
-export { doPost };
+const doGet = async (url: string) => {
+	try {
+		const response = await instance.get(url);
+
+		return response.data;
+	} catch (error) {
+		if (error instanceof AxiosError) {
+			return error.response?.data;
+		}
+	}
+};
+
+export { doPost, doGet };

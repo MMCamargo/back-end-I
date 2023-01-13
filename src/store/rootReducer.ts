@@ -1,8 +1,9 @@
-import { configsSlice } from './modules';
+import { loggedUserSlice, userTasksSlice } from './modules';
 import { combineReducers } from '@reduxjs/toolkit';
 
 const reducers = {
-	configsSlice,
+	loggedUserSlice,
+	userTasksSlice,
 };
 
 const rootReducer = combineReducers({

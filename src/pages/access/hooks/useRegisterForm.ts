@@ -34,7 +34,7 @@ function useRegisterForm(
 				password,
 			};
 
-			const response: IDefaultResponse = await doPost('/users', data);
+			const response: IDefaultResponse = await doPost('/user', data);
 
 			if (!response.success) {
 				if (response.message === 'E-mail já utilizado.') {

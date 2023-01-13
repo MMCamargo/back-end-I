@@ -1,9 +1,16 @@
-import { useAuthRedirect } from '../../shared/hooks';
+import { useUserTasks } from './hooks';
 
 const Home = () => {
-	useAuthRedirect('home');
+	const userTasks = useUserTasks();
 
-	return <></>;
+	return (
+		<>
+			{userTasks &&
+				userTasks.map((task) => {
+					return <p>{task.content}</p>;
+				})}
+		</>
+	);
 };
 
 export default Home;

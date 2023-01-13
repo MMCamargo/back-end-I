@@ -1,3 +1,4 @@
-import configsSlice from './configsSlice';
+import loggedUserSlice from './loggedUserSlice';
+import userTasksSlice from './userTasksSlice';
 
-export { configsSlice };
+export { loggedUserSlice, userTasksSlice };

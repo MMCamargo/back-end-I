@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { IUser, IDefaultResponse } from '../../../shared/interfaces';
 import { doPost } from '../../../services';
-import { setLoggedUser } from '../../../store/modules/configsSlice';
+import { setLoggedUser } from '../../../store/modules/loggedUserSlice';
 
 function useLoginForm() {
 	const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ function useLoginForm() {
 			const data: Partial<IUser> = { email, password };
 
 			const response: IDefaultResponse = await doPost(
-				'/users/login',
+				'/user/login',
 				data
 			);
 

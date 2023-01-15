@@ -11,10 +11,12 @@ const useUserTasks = () => {
 	const userTasks = useAppSelector(userTasksSliceSelectAll).data as ITask[];
 
 	useEffect(() => {
-		const { uid } = JSON.parse(window.localStorage.getItem('loggedUser')!);
+		const loggedUser = JSON.parse(
+			window.localStorage.getItem('loggedUser')!
+		);
 
-		if (uid) {
-			dispatch(userTasksThunk(uid!));
+		if (!!loggedUser) {
+			dispatch(userTasksThunk(loggedUser.uid));
 		}
 	}, [dispatch]);
 

@@ -1,3 +1,4 @@
-import handleAddTask from './handleAddTask';
+import handleCreateTask from './handleCreateTask';
+import handleDeleteTask from './handleDeleteTask';
 
-export { handleAddTask };
+export { handleCreateTask, handleDeleteTask };

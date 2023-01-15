@@ -1,6 +1,6 @@
 interface ITask {
+	userUid: string;
 	uid: string;
-	id: string;
 	isArchived: boolean;
 	isConcluded: boolean;
 	content: string;

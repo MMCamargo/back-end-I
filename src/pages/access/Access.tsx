@@ -4,9 +4,9 @@ import { Container, Paper } from '@mui/material';
 import { ConditionallyRender, Register, Login } from './components';
 
 const Access = () => {
-	const [isRegistering, setIsRegistering] = useState(false);
-
 	useAuthRedirect('access');
+
+	const [isRegistering, setIsRegistering] = useState(false);
 
 	return (
 		<Container

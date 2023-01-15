@@ -1,4 +1,5 @@
 import loggedUserSlice from './loggedUserSlice';
 import userTasksSlice from './userTasksSlice';
+import createTaskSlice from './createTaskSlice';
 
-export { loggedUserSlice, userTasksSlice };
+export { loggedUserSlice, userTasksSlice, createTaskSlice };

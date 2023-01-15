@@ -25,4 +25,16 @@ const doGet = async (url: string) => {
 	}
 };
 
-export { doPost, doGet };
+const doDelete = async (url: string) => {
+	try {
+		const response = await instance.delete(url);
+
+		return response.data;
+	} catch (error) {
+		if (error instanceof AxiosError) {
+			return error.response?.data;
+		}
+	}
+};
+
+export { doPost, doGet, doDelete };

@@ -1,26 +1,48 @@
+import { useAuthRedirect, useAppDispatch } from '../../shared/hooks';
 import { useUserTasks } from './hooks';
-import { handleAddTask } from './functions';
 import { useState } from 'react';
+import { handleCreateTask, handleDeleteTask } from './functions';
 
 const Home = () => {
+	useAuthRedirect('home');
+
 	const userTasks = useUserTasks();
 	const [content, setContent] = useState('');
+
+	const dispatch = useAppDispatch();
 
 	return (
 		<>
 			{userTasks &&
 				userTasks.map((task) => {
-					return <p>{task.content}</p>;
+					return (
+						<div key={task.uid}>
+							<p>{task.content}</p>
+							<button
+								onClick={() =>
+									handleDeleteTask(task.uid, dispatch)
+								}
+							>
+								Deletar
+							</button>
+						</div>
+					);
 				})}
 
-			<form onSubmit={(e) => handleAddTask(e, content)}>
+			<form
+				onSubmit={(e) => {
+					handleCreateTask(e, content, setContent, dispatch);
+				}}
+			>
 				<input
 					id='content'
 					type='text'
 					onChange={(e) => setContent(e.target.value)}
 					value={content}
 				/>
-				<button type='submit'>Adicionar task</button>
+				<button type='submit' disabled={!!content ? false : true}>
+					Adicionar task
+				</button>
 			</form>
 		</>
 	);

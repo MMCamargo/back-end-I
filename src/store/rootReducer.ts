@@ -1,9 +1,10 @@
-import { loggedUserSlice, userTasksSlice } from './modules';
+import { loggedUserSlice, userTasksSlice, createTaskSlice } from './modules';
 import { combineReducers } from '@reduxjs/toolkit';
 
 const reducers = {
 	loggedUserSlice,
 	userTasksSlice,
+	createTaskSlice,
 };
 
 const rootReducer = combineReducers({

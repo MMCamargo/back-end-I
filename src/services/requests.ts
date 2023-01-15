@@ -25,6 +25,18 @@ const doGet = async (url: string) => {
 	}
 };
 
+const doPut = async (url: string, data: object) => {
+	try {
+		const response = await instance.put(url, data);
+
+		return response.data;
+	} catch (error) {
+		if (error instanceof AxiosError) {
+			return error.response?.data;
+		}
+	}
+};
+
 const doDelete = async (url: string) => {
 	try {
 		const response = await instance.delete(url);
@@ -37,4 +49,4 @@ const doDelete = async (url: string) => {
 	}
 };
 
-export { doPost, doGet, doDelete };
+export { doPost, doGet, doPut, doDelete };

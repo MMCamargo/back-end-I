@@ -2,11 +2,9 @@ interface ITask {
 	userUid: string;
 	uid: string;
 	isArchived: boolean;
-	isConcluded: boolean;
+	title: string;
 	content: string;
 	date: Date;
-	toggleArchving(): void;
-	toggleConclusion(): void;
 }
 
 export default ITask;

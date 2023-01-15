@@ -1,18 +1,22 @@
 import { IDefaultResponse, ITask } from '../../../shared/interfaces';
+import { TUseAppDispatch } from '../../../shared/types';
 import { createTaskThunk } from '../../../store/modules/createTaskSlice';
 import { addTask } from '../../../store/modules/userTasksSlice';
 
 const handleCreateTask = async (
 	e: React.FormEvent<HTMLFormElement>,
+	title: string,
+	setTitle: React.Dispatch<React.SetStateAction<string>>,
 	content: string,
 	setContent: React.Dispatch<React.SetStateAction<string>>,
-	dispatch: any
+	dispatch: TUseAppDispatch
 ) => {
 	e.preventDefault();
 
 	const loggedUser = JSON.parse(window.localStorage.getItem('loggedUser')!);
 	const newTask: Partial<ITask> = {
-		content: content,
+		title,
+		content,
 		userUid: loggedUser.uid,
 	};
 
@@ -24,6 +28,7 @@ const handleCreateTask = async (
 		dispatch(addTask(data));
 	}
 
+	setTitle('');
 	setContent('');
 };
 

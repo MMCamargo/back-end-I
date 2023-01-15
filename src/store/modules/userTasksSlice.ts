@@ -1,7 +1,7 @@
 import { IDefaultResponse, ITask } from '../../shared/interfaces';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../rootReducer';
-import { doGet, doDelete } from '../../services';
+import { doGet, doPut, doDelete } from '../../services';
 
 const initialState: IDefaultResponse = {
 	success: true,
@@ -12,6 +12,18 @@ const userTasksThunk = createAsyncThunk<IDefaultResponse, string>(
 	async (userUid) => {
 		const response: IDefaultResponse = await doGet(
 			`/tasks/user/${userUid}`
+		);
+
+		return response;
+	}
+);
+
+const archiveTaskThunk = createAsyncThunk<IDefaultResponse, string>(
+	'/archiveTask',
+	async (taskUid, data) => {
+		const response: IDefaultResponse = await doPut(
+			`/task/archiving/${taskUid}`,
+			data
 		);
 
 		return response;
@@ -62,11 +74,20 @@ const userTasksSlice = createSlice({
 					state.success = false;
 					state.message = message;
 				}
+			})
+			.addCase(archiveTaskThunk.fulfilled, (state, action) => {
+				const { data } = action.payload;
+
+				const archivedTask: ITask = state.data.find(
+					(task: ITask) => task.uid === data.uid
+				);
+
+				archivedTask.isArchived = true;
 			});
 	},
 });
 
-export { userTasksThunk, deleteTaskThunk };
+export { userTasksThunk, archiveTaskThunk, deleteTaskThunk };
 
 export const { addTask } = userTasksSlice.actions;
 

@@ -6,6 +6,7 @@ import {
 	handleDeleteTask,
 	handleLogout,
 	handleArchiveTask,
+	handleUnarchiveTask,
 } from './functions';
 import { useNavigate } from 'react-router-dom';
 
@@ -62,7 +63,7 @@ const Home = () => {
 							<div key={task.uid}>
 								<button
 									onClick={(e) =>
-										handleArchiveTask(task.uid, dispatch)
+										handleUnarchiveTask(task.uid, dispatch)
 									}
 								>
 									arquivar

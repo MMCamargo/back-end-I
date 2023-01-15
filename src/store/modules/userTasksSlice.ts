@@ -30,6 +30,18 @@ const archiveTaskThunk = createAsyncThunk<IDefaultResponse, string>(
 	}
 );
 
+const unarchiveTaskThunk = createAsyncThunk<IDefaultResponse, string>(
+	'/unarchiveTask',
+	async (taskUid, data) => {
+		const response: IDefaultResponse = await doPut(
+			`/task/archiving/${taskUid}`,
+			data
+		);
+
+		return response;
+	}
+);
+
 const deleteTaskThunk = createAsyncThunk<IDefaultResponse, string>(
 	'/deleteTask',
 	async (taskUid) => {
@@ -83,11 +95,25 @@ const userTasksSlice = createSlice({
 				);
 
 				archivedTask.isArchived = true;
+			})
+			.addCase(unarchiveTaskThunk.fulfilled, (state, action) => {
+				const { data } = action.payload;
+
+				const archivedTask: ITask = state.data.find(
+					(task: ITask) => task.uid === data.uid
+				);
+
+				archivedTask.isArchived = false;
 			});
 	},
 });
 
-export { userTasksThunk, archiveTaskThunk, deleteTaskThunk };
+export {
+	userTasksThunk,
+	archiveTaskThunk,
+	unarchiveTaskThunk,
+	deleteTaskThunk,
+};
 
 export const { addTask } = userTasksSlice.actions;
 

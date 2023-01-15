@@ -1,14 +1,15 @@
 import { useAuthRedirect, useAppDispatch } from '../../shared/hooks';
 import { useUserTasks } from './hooks';
 import { useState } from 'react';
+import { handleCreateTask } from './functions';
+import { ConditionallyRender } from '../../shared/components';
 import {
-	handleCreateTask,
-	handleDeleteTask,
-	handleLogout,
-	handleArchiveTask,
-	handleUnarchiveTask,
-} from './functions';
-import { useNavigate } from 'react-router-dom';
+	LogoutBtn,
+	TasksList,
+	ArchivedTaskList,
+	ShowArchivedsBtn,
+} from './components';
+import { Button } from '@mui/material';
 
 const Home = () => {
 	useAuthRedirect('home');
@@ -17,69 +18,26 @@ const Home = () => {
 
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
+	const [showArchiveds, setShowArchiveds] = useState(false);
 
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
 
 	return (
 		<>
-			<button onClick={() => handleLogout(dispatch, navigate)}>
-				Sair
-			</button>
+			<LogoutBtn />
 
-			{userTasks &&
-				userTasks
-					.filter((tasks) => !tasks.isArchived)
-					.map((task) => {
-						return (
-							<div key={task.uid}>
-								<button
-									onClick={(e) =>
-										handleArchiveTask(task.uid, dispatch)
-									}
-								>
-									arquivar
-								</button>
-								<p>{task.title}</p>
-								<p>{task.content}</p>
-								<button
-									onClick={() =>
-										handleDeleteTask(task.uid, dispatch)
-									}
-								>
-									Deletar
-								</button>
-							</div>
-						);
-					})}
+			<ShowArchivedsBtn
+				state={showArchiveds}
+				setState={setShowArchiveds}
+			/>
 
-			<p>arquivados abaixo</p>
+			<ConditionallyRender
+				condition={showArchiveds}
+				show={<ArchivedTaskList tasks={userTasks} />}
+			/>
 
-			{userTasks &&
-				userTasks
-					.filter((tasks) => tasks.isArchived)
-					.map((task) => {
-						return (
-							<div key={task.uid}>
-								<button
-									onClick={(e) =>
-										handleUnarchiveTask(task.uid, dispatch)
-									}
-								>
-									arquivar
-								</button>
-								<p>{task.title}</p>
-								<p>{task.content}</p>
-								<button
-									onClick={() =>
-										handleDeleteTask(task.uid, dispatch)
-									}
-								>
-									Deletar
-								</button>
-							</div>
-						);
-					})}
+			<TasksList tasks={userTasks} />
+
 			<form
 				onSubmit={(e) => {
 					handleCreateTask(

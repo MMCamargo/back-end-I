@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useAuthRedirect } from '../../shared/hooks';
 import { Container, Paper } from '@mui/material';
-import { ConditionallyRender, Register, Login } from './components';
+import { ConditionallyRender } from '../../shared/components';
+import { Register, Login } from './components';
 
 const Access = () => {
 	useAuthRedirect('access');

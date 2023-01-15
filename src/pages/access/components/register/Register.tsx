@@ -1,6 +1,6 @@
 import { useRegisterForm } from '../../hooks';
 import { Box, Typography, TextField, Button } from '@mui/material';
-import { ConditionallyRender } from '..';
+import { ConditionallyRender } from '../../../../shared/components';
 
 const Register = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 	const {

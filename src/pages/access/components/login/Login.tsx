@@ -1,6 +1,6 @@
 import { useLoginForm } from '../../hooks';
 import { Box, Typography, TextField, Button } from '@mui/material';
-import { ConditionallyRender } from '..';
+import { ConditionallyRender } from '../../../../shared/components';
 
 const Login = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 	const {

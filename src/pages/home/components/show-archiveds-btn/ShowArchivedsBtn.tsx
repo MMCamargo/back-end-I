@@ -9,7 +9,11 @@ const ShowArchivedsBtn = (props: IShowArchivedsBtnProps) => {
 	const { setState, state } = props;
 
 	return (
-		<Button onClick={() => setState(!state)}>
+		<Button
+			sx={{ justifySelf: 'end' }}
+			variant='contained'
+			onClick={() => setState(!state)}
+		>
 			{state ? 'Esconder arquivados' : 'Ver Arquivados'}
 		</Button>
 	);

@@ -1,5 +1,6 @@
 import { ITask } from '../../../../shared/interfaces';
-import Task from '../task/Task';
+import { Box } from '@mui/material';
+import { Task } from '..';
 
 interface ITasksListProps {
 	tasks: ITask[];
@@ -9,7 +10,7 @@ const TasksList = (props: ITasksListProps) => {
 	const { tasks } = props;
 
 	return (
-		<>
+		<Box sx={{ display: 'grid', gap: 2 }}>
 			{tasks &&
 				tasks
 					.filter((task) => !task.isArchived)
@@ -22,7 +23,7 @@ const TasksList = (props: ITasksListProps) => {
 							isArchived={false}
 						/>
 					))}
-		</>
+		</Box>
 	);
 };
 

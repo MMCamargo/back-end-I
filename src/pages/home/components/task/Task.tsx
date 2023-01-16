@@ -1,12 +1,7 @@
 import { useState } from 'react';
-import { Paper, Box, Typography, Button } from '@mui/material';
-import { useAppDispatch } from '../../../../shared/hooks';
-import {
-	handleArchiveTask,
-	handleUnarchiveTask,
-	handleDeleteTask,
-} from '../../functions';
-import { EditingModeTask } from '..';
+import { Paper } from '@mui/material';
+import { EditingModeTask, ViewModeTask } from '..';
+import { ConditionallyRender } from '../../../../shared/components';
 
 interface ITaskProps {
 	uid: string;
@@ -20,69 +15,31 @@ const Task = (props: ITaskProps) => {
 
 	const [editingMode, setEditingMode] = useState(false);
 
-	const dispatch = useAppDispatch();
-
 	return (
-		<Paper sx={{ p: 2 }} key={uid}>
-			{editingMode ? (
-				<EditingModeTask
-					title={title}
-					content={content}
-					setEditingMode={setEditingMode}
+		<>
+			<Paper sx={{ minHeight: 268.5, width: '100%' }} key={uid}>
+				<ConditionallyRender
+					condition={editingMode}
+					show={
+						<EditingModeTask
+							uid={uid}
+							title={title}
+							content={content}
+							setEditingMode={setEditingMode}
+						/>
+					}
+					elseShow={
+						<ViewModeTask
+							uid={uid}
+							title={title}
+							content={content}
+							isArchived={isArchived}
+							setEditingMode={setEditingMode}
+						/>
+					}
 				/>
-			) : (
-				<>
-					<Box sx={{ minHeight: '50px' }}>
-						<Typography>{title}</Typography>
-					</Box>
-
-					<Box sx={{ minHeight: '100px' }}>
-						<Typography>{content}</Typography>
-					</Box>
-
-					<Box
-						sx={{
-							display: 'flex',
-							justifyContent: 'flex-end',
-							gap: 2,
-						}}
-					>
-						<Button
-							variant='contained'
-							onClick={() => setEditingMode(true)}
-						>
-							Editar
-						</Button>
-
-						{!isArchived ? (
-							<Button
-								variant='contained'
-								onClick={() => handleArchiveTask(uid, dispatch)}
-							>
-								Arquivar
-							</Button>
-						) : (
-							<Button
-								variant='contained'
-								onClick={() =>
-									handleUnarchiveTask(uid, dispatch)
-								}
-							>
-								Desarquivar
-							</Button>
-						)}
-
-						<Button
-							variant='contained'
-							color='error'
-							onClick={() => handleDeleteTask(uid, dispatch)}
-						>
-							Excluir
-						</Button>
-					</Box>
-				</>
-			)}
-		</Paper>
+			</Paper>
+		</>
 	);
 };
 

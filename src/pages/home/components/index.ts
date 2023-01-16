@@ -1,21 +1,27 @@
-import LogoutBtn from './logout-btn/LogoutBtn';
-import ShowArchivedsBtn from './show-archiveds-btn/ShowArchivedsBtn';
-import TasksList from './tasks-list/TasksList';
 import ArchivedTaskList from './archived-tasks-list/ArchivedTasksList';
+import EditingModeTask from './editing-mode-task/EditingModeTask';
+import Input from './input/Input';
+import LogoutBtn from './logout-btn/LogoutBtn';
+import Navbar from './navbar/Navbar';
+import NewTaskForm from './new-task-form/NewTaskForm';
+import ShowArchivedsBtn from './show-archiveds-btn/ShowArchivedsBtn';
 import Task from './task/Task';
 import TasksArea from './tasks-area/TasksArea';
-import NewTaskForm from './new-task-form/NewTaskForm';
-import Navbar from './navbar/Navbar';
-import EditingModeTask from './editing-mode-task/EditingModeTask';
+import TasksList from './tasks-list/TasksList';
+import TextArea from './text-area/TextArea';
+import ViewModeTask from './view-mode-task/ViewModeTask';
 
 export {
-	LogoutBtn,
-	ShowArchivedsBtn,
-	TasksList,
 	ArchivedTaskList,
+	EditingModeTask,
+	Input,
+	LogoutBtn,
+	Navbar,
+	NewTaskForm,
+	ShowArchivedsBtn,
 	Task,
 	TasksArea,
-	NewTaskForm,
-	Navbar,
-	EditingModeTask,
+	TasksList,
+	TextArea,
+	ViewModeTask,
 };

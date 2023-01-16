@@ -58,6 +58,14 @@ const userTasksSlice = createSlice({
 		addTask: (state, action) => {
 			state.data.push(action.payload);
 		},
+		updateTask: (state, action) => {
+			const task = state.data.find(
+				(task: ITask) => task.uid === action.payload.uid
+			);
+
+			task.title = action.payload.title;
+			task.content = action.payload.content;
+		},
 	},
 	extraReducers(builder) {
 		builder
@@ -115,7 +123,7 @@ export {
 	deleteTaskThunk,
 };
 
-export const { addTask } = userTasksSlice.actions;
+export const { addTask, updateTask } = userTasksSlice.actions;
 
 export const userTasksSliceSelectAll = (state: RootState) =>
 	state.userTasksSlice;

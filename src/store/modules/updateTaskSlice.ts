@@ -2,18 +2,20 @@ import { IDefaultResponse, ITask } from '../../shared/interfaces';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doPut } from '../../services';
 import { RootState } from '../rootReducer';
+import { useAppDispatch } from '../../shared/hooks';
+import { updateTask } from './userTasksSlice';
 
 const initialState: IDefaultResponse = {
 	success: true,
 };
 
-const updateTaskThunk = createAsyncThunk<IDefaultResponse, string>(
+const updateTaskThunk = createAsyncThunk<IDefaultResponse, Partial<ITask>>(
 	'/updateTask',
-	async (taskUid, data) => {
-		const response: IDefaultResponse = await doPut(
-			`/task/edit/${taskUid}`,
-			data
-		);
+	async ({ uid, title, content }) => {
+		const response: IDefaultResponse = await doPut(`/task/edit/${uid}`, {
+			title,
+			content,
+		});
 
 		return response;
 	}

@@ -1,6 +1,12 @@
 import { ITask } from '../../../../shared/interfaces';
 import { useState } from 'react';
-import { NewTaskForm, ShowArchivedsBtn, ArchivedTaskList, TasksList } from '..';
+import {
+	NewTaskForm,
+	ShowArchivedsBtn,
+	ArchivedTaskList,
+	TasksList,
+	SearchTask,
+} from '..';
 import { ConditionallyRender } from '../../../../shared/components';
 import { Box } from '@mui/material';
 
@@ -23,6 +29,8 @@ const TasksArea = (props: ITasksAreaProps) => {
 				}}
 			>
 				<NewTaskForm />
+
+				<SearchTask />
 
 				<ShowArchivedsBtn
 					state={showArchiveds}

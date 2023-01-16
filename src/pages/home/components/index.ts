@@ -4,6 +4,7 @@ import Input from './input/Input';
 import LogoutBtn from './logout-btn/LogoutBtn';
 import Navbar from './navbar/Navbar';
 import NewTaskForm from './new-task-form/NewTaskForm';
+import SearchTask from './search-task/SearchTask';
 import ShowArchivedsBtn from './show-archiveds-btn/ShowArchivedsBtn';
 import Task from './task/Task';
 import TasksArea from './tasks-area/TasksArea';
@@ -18,6 +19,7 @@ export {
 	LogoutBtn,
 	Navbar,
 	NewTaskForm,
+	SearchTask,
 	ShowArchivedsBtn,
 	Task,
 	TasksArea,

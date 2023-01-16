@@ -85,53 +85,6 @@ const ViewModeTask = (props: IViewModeTaskProps) => {
 					Deletar
 				</Button>
 			</Box>
-
-			{/* <Box sx={{ minHeight: '50px' }}>
-				<Typography>{title}</Typography>
-			</Box>
-
-			<Box sx={{ minHeight: '100px' }}>
-				<Typography>{content}</Typography>
-			</Box>
-
-			<Box
-				sx={{
-					display: 'flex',
-					justifyContent: 'flex-end',
-					gap: 2,
-				}}
-			>
-				<Button
-					variant='contained'
-					onClick={() => setEditingMode(true)}
-				>
-					Editar
-				</Button>
-
-				{!isArchived ? (
-					<Button
-						variant='contained'
-						onClick={() => handleArchiveTask(uid, dispatch)}
-					>
-						Arquivar
-					</Button>
-				) : (
-					<Button
-						variant='contained'
-						onClick={() => handleUnarchiveTask(uid, dispatch)}
-					>
-						Desarquivar
-					</Button>
-				)}
-
-				<Button
-					variant='contained'
-					color='error'
-					onClick={() => handleDeleteTask(uid, dispatch)}
-				>
-					Excluir
-				</Button>
-			</Box> */}
 		</>
 	);
 };

@@ -18,6 +18,17 @@ const userTasksThunk = createAsyncThunk<IDefaultResponse, string>(
 	}
 );
 
+const searchTasksThunk = createAsyncThunk<
+	IDefaultResponse,
+	{ userUid: string; text: string }
+>('/searchUserTasks', async ({ userUid, text }) => {
+	const response: IDefaultResponse = await doGet(
+		`/tasks/search/${userUid}?text=${text}`
+	);
+
+	return response;
+});
+
 const archiveTaskThunk = createAsyncThunk<IDefaultResponse, string>(
 	'/archiveTask',
 	async (taskUid, data) => {
@@ -81,6 +92,18 @@ const userTasksSlice = createSlice({
 				state.message = action.error.message;
 				state.data = null;
 			})
+			.addCase(searchTasksThunk.fulfilled, (state, action) => {
+				const { success, message, data } = action.payload;
+
+				state.success = success;
+				state.message = message;
+				state.data = data;
+			})
+			.addCase(searchTasksThunk.rejected, (state, action) => {
+				state.success = false;
+				state.message = action.error.message;
+				state.data = null;
+			})
 			.addCase(deleteTaskThunk.fulfilled, (state, action) => {
 				const { success, message } = action.payload;
 
@@ -118,6 +141,7 @@ const userTasksSlice = createSlice({
 
 export {
 	userTasksThunk,
+	searchTasksThunk,
 	archiveTaskThunk,
 	unarchiveTaskThunk,
 	deleteTaskThunk,

@@ -69,45 +69,18 @@ const EditingModeTask = (props: IEditingModeTaskProps) => {
 				<Button
 					variant='contained'
 					onClick={() =>
-						handleUpdateTask(uid, newTitle, newContent, dispatch)
+						handleUpdateTask(
+							uid,
+							newTitle,
+							newContent,
+							dispatch,
+							setEditingMode
+						)
 					}
 				>
 					Salvar
 				</Button>
 			</Box>
-
-			{/* <Box sx={{ minHeight: '50px' }}>
-				<TextField
-					onChange={(e) => setNewTitle(e.target.value)}
-					value={newTitle}
-				/>
-			</Box>
-
-			<Box sx={{ minHeight: '100px' }}>
-				<TextField
-					onChange={(e) => setNewContent(e.target.value)}
-					value={newContent}
-				/>
-			</Box>
-
-			<Box
-				sx={{
-					display: 'flex',
-					justifyContent: 'flex-end',
-					gap: 2,
-				}}
-			>
-				<Button
-					variant='contained'
-					onClick={() => setEditingMode(false)}
-				>
-					Cancelar
-				</Button>
-
-				<Button variant='contained' color='error' onClick={() => {}}>
-					Salvar
-				</Button>
-			</Box> */}
 		</>
 	);
 };

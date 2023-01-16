@@ -15,12 +15,20 @@ const TasksArea = (props: ITasksAreaProps) => {
 
 	return (
 		<Box sx={{ display: 'grid', gap: 2 }}>
-			<NewTaskForm />
+			<Box
+				sx={{
+					display: 'flex',
+					gap: 2,
+					justifyContent: 'space-between',
+				}}
+			>
+				<NewTaskForm />
 
-			<ShowArchivedsBtn
-				state={showArchiveds}
-				setState={setShowArchiveds}
-			/>
+				<ShowArchivedsBtn
+					state={showArchiveds}
+					setState={setShowArchiveds}
+				/>
+			</Box>
 
 			<ConditionallyRender
 				condition={showArchiveds}

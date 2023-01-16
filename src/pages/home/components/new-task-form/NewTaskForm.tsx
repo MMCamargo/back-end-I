@@ -11,6 +11,7 @@ const NewTaskForm = () => {
 
 	return (
 		<Box
+			sx={{ display: 'flex', gap: 2 }}
 			component={'form'}
 			onSubmit={(e) => {
 				handleCreateTask(
@@ -24,18 +25,23 @@ const NewTaskForm = () => {
 			}}
 		>
 			<TextField
+				size='small'
+				label='Título'
 				id='content'
 				type='text'
 				onChange={(e) => setTitle(e.target.value)}
 				value={title}
 			/>
 			<TextField
+				size='small'
+				label='Conteúdo'
 				id='content'
 				type='text'
 				onChange={(e) => setContent(e.target.value)}
 				value={content}
 			/>
 			<Button
+				variant='contained'
 				type='submit'
 				disabled={!!title && !!content ? false : true}
 			>

@@ -7,7 +7,8 @@ const handleUpdateTask = async (
 	uid: string,
 	title: string,
 	content: string,
-	dispatch: TUseAppDispatch
+	dispatch: TUseAppDispatch,
+	setEditingMode: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
 	const response = await dispatch(updateTaskThunk({ uid, title, content }));
 
@@ -15,6 +16,8 @@ const handleUpdateTask = async (
 		const { data } = response.payload as IDefaultResponse;
 
 		dispatch(updateTask(data));
+
+		setEditingMode(false);
 	}
 };
 

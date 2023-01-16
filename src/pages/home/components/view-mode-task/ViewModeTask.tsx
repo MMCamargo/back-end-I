@@ -51,7 +51,7 @@ const ViewModeTask = (props: IViewModeTaskProps) => {
 				}}
 			>
 				<Button
-					variant='outlined'
+					variant='contained'
 					onClick={() => {
 						setEditingMode(true);
 					}}
@@ -61,14 +61,16 @@ const ViewModeTask = (props: IViewModeTaskProps) => {
 
 				{!isArchived ? (
 					<Button
-						variant='contained'
+						color='error'
+						variant='outlined'
 						onClick={() => handleArchiveTask(uid, dispatch)}
 					>
 						Arquivar
 					</Button>
 				) : (
 					<Button
-						variant='contained'
+						color='error'
+						variant='outlined'
 						onClick={() => handleUnarchiveTask(uid, dispatch)}
 					>
 						Desarquivar
@@ -76,6 +78,7 @@ const ViewModeTask = (props: IViewModeTaskProps) => {
 				)}
 
 				<Button
+					color='error'
 					variant='contained'
 					onClick={() => handleDeleteTask(uid, dispatch)}
 				>

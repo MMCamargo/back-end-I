@@ -1,6 +1,6 @@
+import { BackEndIState } from '../../store/rootReducer';
 import { useSelector, TypedUseSelectorHook } from 'react-redux';
-import { RootState } from '../../store/rootReducer';
 
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+const useAppSelector: TypedUseSelectorHook<BackEndIState> = useSelector;
 
 export default useAppSelector;

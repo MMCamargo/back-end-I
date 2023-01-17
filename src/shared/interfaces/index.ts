@@ -1,5 +1,5 @@
 import IDefaultResponse from './iDefaultResponse';
-import IUser from './iUser';
 import ITask from './iTask';
+import IUser from './iUser';
 
-export type { IDefaultResponse, IUser, ITask };
+export type { IDefaultResponse, ITask, IUser };

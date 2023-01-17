@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
-import { RootState } from '../rootReducer';
+import { BackEndIState } from '../rootReducer';
 
 interface ILoggedUser {
 	uid: string;
@@ -28,7 +28,7 @@ const loggedUserSlice = createSlice({
 
 export const { setLoggedUser, removeLoggedUser } = loggedUserSlice.actions;
 
-export const loggedUserSliceSelectAll = (state: RootState) =>
+export const loggedUserSliceSelectAll = (state: BackEndIState) =>
 	state.loggedUserSlice;
 
 export default loggedUserSlice.reducer;

@@ -1,6 +1,6 @@
 import { IDefaultResponse, ITask } from '../../shared/interfaces';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../rootReducer';
+import { BackEndIState } from '../rootReducer';
 import { doGet, doPut, doDelete } from '../../services';
 
 const initialState: IDefaultResponse = {
@@ -149,7 +149,7 @@ export {
 
 export const { addTask, updateTask } = userTasksSlice.actions;
 
-export const userTasksSliceSelectAll = (state: RootState) =>
+export const userTasksSliceSelectAll = (state: BackEndIState) =>
 	state.userTasksSlice;
 
 export default userTasksSlice.reducer;

@@ -1,7 +1,7 @@
-import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../../shared/hooks';
 import { handleLogout } from '../../functions';
+import { Button } from '@mui/material';
 
 const LogoutBtn = () => {
 	const dispatch = useAppDispatch();

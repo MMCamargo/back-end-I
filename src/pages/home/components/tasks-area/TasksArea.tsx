@@ -1,22 +1,20 @@
-import { ITask } from '../../../../shared/interfaces';
 import { useState } from 'react';
 import {
-	NewTaskForm,
-	ShowArchivedsBtn,
 	ArchivedTaskList,
-	TasksList,
 	SearchTask,
+	ShowArchivedsBtn,
+	TasksList,
+	NewTaskForm,
 } from '..';
 import { ConditionallyRender } from '../../../../shared/components';
+import { ITask } from '../../../../shared/interfaces';
 import { Box } from '@mui/material';
 
 interface ITasksAreaProps {
 	tasks: ITask[];
 }
 
-const TasksArea = (props: ITasksAreaProps) => {
-	const { tasks } = props;
-
+const TasksArea = ({ tasks }: ITasksAreaProps) => {
 	const [showArchiveds, setShowArchiveds] = useState(false);
 
 	return (
@@ -33,8 +31,8 @@ const TasksArea = (props: ITasksAreaProps) => {
 				<SearchTask />
 
 				<ShowArchivedsBtn
-					state={showArchiveds}
 					setState={setShowArchiveds}
+					state={showArchiveds}
 				/>
 			</Box>
 

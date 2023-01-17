@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../../../shared/hooks';
 import { handleCreateTask } from '../../functions';
-import { Box, TextField, Button } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 
 const NewTaskForm = () => {
+	const dispatch = useAppDispatch();
+
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 
-	const dispatch = useAppDispatch();
-
 	return (
 		<Box
-			sx={{ display: 'flex', gap: 2 }}
 			component={'form'}
 			onSubmit={(e) => {
 				handleCreateTask(
@@ -23,27 +22,28 @@ const NewTaskForm = () => {
 					dispatch
 				);
 			}}
+			sx={{ display: 'flex', gap: 2 }}
 		>
 			<TextField
-				size='small'
-				label='Título'
 				id='content'
-				type='text'
+				label='Título'
 				onChange={(e) => setTitle(e.target.value)}
+				size='small'
+				type='text'
 				value={title}
 			/>
 			<TextField
-				size='small'
-				label='Conteúdo'
 				id='content'
-				type='text'
+				label='Conteúdo'
 				onChange={(e) => setContent(e.target.value)}
+				size='small'
+				type='text'
 				value={content}
 			/>
 			<Button
-				variant='contained'
-				type='submit'
 				disabled={!!title && !!content ? false : true}
+				type='submit'
+				variant='contained'
 			>
 				Salvar
 			</Button>

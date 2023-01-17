@@ -1,7 +1,7 @@
 import { IDefaultResponse, ITask } from '../../shared/interfaces';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doPost } from '../../services';
-import { RootState } from '../rootReducer';
+import { BackEndIState } from '../rootReducer';
 
 const initialState: IDefaultResponse = {
 	success: true,
@@ -41,7 +41,7 @@ export { createTaskThunk };
 
 export const {} = createTaskSlice.actions;
 
-export const createTaskSliceSelectAll = (state: RootState) =>
+export const createTaskSliceSelectAll = (state: BackEndIState) =>
 	state.createTaskSlice;
 
 export default createTaskSlice.reducer;

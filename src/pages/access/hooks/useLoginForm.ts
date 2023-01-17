@@ -1,22 +1,21 @@
-import { useAppDispatch } from '../../../shared/hooks';
-import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { IUser, IDefaultResponse } from '../../../shared/interfaces';
-import { doPost } from '../../../services';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../shared/hooks';
 import { setLoggedUser } from '../../../store/modules/loggedUserSlice';
+import { doPost } from '../../../services';
+import { IUser, IDefaultResponse } from '../../../shared/interfaces';
+import { useFormik } from 'formik';
 
 function useLoginForm() {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	const { values, resetForm, handleChange, handleSubmit } = useFormik({
+	const { handleChange, handleSubmit, resetForm, values } = useFormik({
 		initialValues: {
 			email: '',
 			password: '',
 		},
-		async onSubmit(values) {
-			const { email, password } = values;
+		async onSubmit({ email, password }) {
 			const data: Partial<IUser> = { email, password };
 
 			const response: IDefaultResponse = await doPost(
@@ -44,8 +43,8 @@ function useLoginForm() {
 		},
 	});
 
-	const [showAlert, setShowAlert] = useState<boolean>(false);
-	const [disabledBtn, setDisabledBtn] = useState<boolean>(true);
+	const [showAlert, setShowAlert] = useState(false);
+	const [disabledBtn, setDisabledBtn] = useState(true);
 
 	useEffect(() => {
 		values.email !== '' && values.password !== ''
@@ -62,14 +61,14 @@ function useLoginForm() {
 	}, [showAlert]);
 
 	return {
-		values,
-		resetForm,
+		disabledBtn,
 		handleChange,
 		handleSubmit,
-		showAlert,
-		setShowAlert,
-		disabledBtn,
+		resetForm,
 		setDisabledBtn,
+		setShowAlert,
+		showAlert,
+		values,
 	};
 }
 

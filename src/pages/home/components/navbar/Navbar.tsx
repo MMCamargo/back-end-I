@@ -1,5 +1,5 @@
-import { Box } from '@mui/material';
 import { LogoutBtn } from '..';
+import { Box } from '@mui/material';
 
 const Navbar = () => {
 	return (

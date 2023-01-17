@@ -1,16 +1,16 @@
 import {
-	loggedUserSlice,
-	userTasksSlice,
 	createTaskSlice,
+	loggedUserSlice,
 	updateTaskSlice,
+	userTasksSlice,
 } from './modules';
 import { combineReducers } from '@reduxjs/toolkit';
 
 const reducers = {
-	loggedUserSlice,
-	userTasksSlice,
 	createTaskSlice,
+	loggedUserSlice,
 	updateTaskSlice,
+	userTasksSlice,
 };
 
 const rootReducer = combineReducers({
@@ -19,4 +19,4 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type BackEndIState = ReturnType<typeof rootReducer>;

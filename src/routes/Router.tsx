@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Access, Home } from '../pages';
 
-function AppRoutes(): JSX.Element {
+const AppRoutes = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -10,6 +10,6 @@ function AppRoutes(): JSX.Element {
 			</Routes>
 		</BrowserRouter>
 	);
-}
+};
 
 export default AppRoutes;

@@ -1,7 +1,7 @@
 import { IDefaultResponse, ITask } from '../../shared/interfaces';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doPut } from '../../services';
-import { RootState } from '../rootReducer';
+import { BackEndIState } from '../rootReducer';
 import { useAppDispatch } from '../../shared/hooks';
 import { updateTask } from './userTasksSlice';
 
@@ -46,7 +46,7 @@ export { updateTaskThunk };
 
 export const {} = updateTaskSlice.actions;
 
-export const updateTaskSliceSelectAll = (state: RootState) =>
+export const updateTaskSliceSelectAll = (state: BackEndIState) =>
 	state.updateTaskSlice;
 
 export default updateTaskSlice.reducer;

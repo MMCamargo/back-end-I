@@ -11,7 +11,7 @@ export {
 	handleCreateTask,
 	handleDeleteTask,
 	handleLogout,
+	handleSearchTask,
 	handleUnarchiveTask,
 	handleUpdateTask,
-	handleSearchTask,
 };

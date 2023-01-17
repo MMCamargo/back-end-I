@@ -1,26 +1,24 @@
+import { Task } from '..';
 import { ITask } from '../../../../shared/interfaces';
 import { Box } from '@mui/material';
-import { Task } from '..';
 
 interface ITasksListProps {
 	tasks: ITask[];
 }
 
-const TasksList = (props: ITasksListProps) => {
-	const { tasks } = props;
-
+const TasksList = ({ tasks }: ITasksListProps) => {
 	return (
 		<Box sx={{ display: 'grid', gap: 2 }}>
 			{tasks &&
 				tasks
-					.filter((task) => !task.isArchived)
-					.map((task) => (
+					.filter(({ isArchived }) => !isArchived)
+					.map(({ content, title, uid }) => (
 						<Task
-							key={task.uid}
-							uid={task.uid}
-							title={task.title}
-							content={task.content}
+							content={content}
 							isArchived={false}
+							key={uid}
+							title={title}
+							uid={uid}
 						/>
 					))}
 		</Box>

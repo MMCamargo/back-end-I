@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useAuthRedirect } from '../../shared/hooks';
-import { Container, Paper } from '@mui/material';
-import { ConditionallyRender } from '../../shared/components';
 import { Register, Login } from './components';
+import { ConditionallyRender } from '../../shared/components';
+import { Container, Paper } from '@mui/material';
 
 const Access = () => {
 	useAuthRedirect('access');
@@ -21,6 +21,7 @@ const Access = () => {
 			}}
 		>
 			<Paper
+				elevation={3}
 				sx={{
 					alignItems: 'center',
 					display: 'grid',
@@ -32,12 +33,11 @@ const Access = () => {
 					p: 3,
 					width: { xs: '100%', sm: 400 },
 				}}
-				elevation={3}
 			>
 				<ConditionallyRender
 					condition={isRegistering}
-					show={Register(setIsRegistering)}
 					elseShow={Login(setIsRegistering)}
+					show={Register(setIsRegistering)}
 				/>
 			</Paper>
 		</Container>

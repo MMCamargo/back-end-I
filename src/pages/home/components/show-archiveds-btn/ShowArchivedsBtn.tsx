@@ -5,14 +5,12 @@ interface IShowArchivedsBtnProps {
 	state: boolean;
 }
 
-const ShowArchivedsBtn = (props: IShowArchivedsBtnProps) => {
-	const { setState, state } = props;
-
+const ShowArchivedsBtn = ({ setState, state }: IShowArchivedsBtnProps) => {
 	return (
 		<Button
+			onClick={() => setState(!state)}
 			sx={{ justifySelf: 'end' }}
 			variant='contained'
-			onClick={() => setState(!state)}
 		>
 			{state ? 'Esconder arquivados' : 'Ver Arquivados'}
 		</Button>

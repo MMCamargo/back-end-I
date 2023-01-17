@@ -1,21 +1,21 @@
-import { useFormik } from 'formik';
-import { registerSchema } from '../schemas';
 import { useState, useEffect } from 'react';
-import { IUser, IDefaultResponse } from '../../../shared/interfaces';
 import { doPost } from '../../../services';
+import { registerSchema } from '../schemas';
+import { IUser, IDefaultResponse } from '../../../shared/interfaces';
+import { useFormik } from 'formik';
 
 function useRegisterForm(
 	setState: React.Dispatch<React.SetStateAction<boolean>>
 ) {
 	const {
-		values,
 		errors,
-		touched,
+		handleBlur,
+		handleChange,
+		handleSubmit,
 		resetForm,
 		setFieldTouched,
-		handleChange,
-		handleBlur,
-		handleSubmit,
+		touched,
+		values,
 	} = useFormik({
 		initialValues: {
 			firstName: '',
@@ -25,8 +25,7 @@ function useRegisterForm(
 			confirmPassword: '',
 		},
 		validationSchema: registerSchema,
-		async onSubmit(values) {
-			const { firstName, lastName, email, password } = values;
+		async onSubmit({ firstName, lastName, email, password }) {
 			const data: Partial<IUser> = {
 				firstName,
 				lastName,
@@ -55,8 +54,8 @@ function useRegisterForm(
 		},
 	});
 
-	const [showAlert, setShowAlert] = useState<boolean>(false);
-	const [disabledBtn, setDisabledBtn] = useState<boolean>(true);
+	const [showAlert, setShowAlert] = useState(false);
+	const [disabledBtn, setDisabledBtn] = useState(true);
 
 	useEffect(() => {
 		const allFieldsFilled = Object.values(values).every(
@@ -79,18 +78,18 @@ function useRegisterForm(
 	}, [showAlert]);
 
 	return {
-		values,
-		errors,
-		touched,
-		resetForm,
-		setFieldTouched,
-		handleChange,
-		handleBlur,
-		handleSubmit,
-		showAlert,
-		setShowAlert,
 		disabledBtn,
+		errors,
+		handleBlur,
+		handleChange,
+		handleSubmit,
+		resetForm,
 		setDisabledBtn,
+		setFieldTouched,
+		setShowAlert,
+		showAlert,
+		touched,
+		values,
 	};
 }
 

@@ -1,7 +1,7 @@
-import { useAuthRedirect } from '../../shared/hooks';
 import { useUserTasks } from './hooks';
-import { Container } from '@mui/material';
+import { useAuthRedirect } from '../../shared/hooks';
 import { Navbar, TasksArea } from './components';
+import { Container } from '@mui/material';
 
 const Home = () => {
 	useAuthRedirect('home');

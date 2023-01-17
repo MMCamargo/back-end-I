@@ -1,25 +1,25 @@
 import { useLoginForm } from '../../hooks';
-import { Box, Typography, TextField, Button } from '@mui/material';
 import { ConditionallyRender } from '../../../../shared/components';
+import { Box, Button, TextField, Typography } from '@mui/material';
 
 const Login = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 	const {
-		values,
-		resetForm,
+		disabledBtn,
 		handleChange,
 		handleSubmit,
-		showAlert,
+		resetForm,
 		setShowAlert,
-		disabledBtn,
+		showAlert,
+		values,
 	} = useLoginForm();
 
 	return (
 		<Box
-			sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
 			component='form'
 			onSubmit={handleSubmit}
+			sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
 		>
-			<Typography variant='h4' align='center'>
+			<Typography align='center' variant='h4'>
 				Login
 			</Typography>
 
@@ -27,9 +27,9 @@ const Login = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 				condition={showAlert}
 				show={
 					<Typography
-						variant='subtitle1'
-						color='error'
 						align='center'
+						color='error'
+						variant='subtitle1'
 					>
 						E-mail ou senha incorretos.
 					</Typography>
@@ -37,40 +37,40 @@ const Login = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 			/>
 
 			<TextField
-				label='E-mail'
 				id='email'
-				value={values.email}
+				label='E-mail'
 				onChange={handleChange}
+				value={values.email}
 			/>
 
 			<TextField
-				label='Senha'
-				type='password'
 				id='password'
-				value={values.password}
+				label='Senha'
 				onChange={handleChange}
+				type='password'
+				value={values.password}
 			/>
 
 			<Button
-				sx={{ maxHeight: 36.5 }}
-				variant='contained'
-				fullWidth
-				type='submit'
 				disabled={disabledBtn}
+				fullWidth
 				onClick={() => setState(false)}
+				sx={{ maxHeight: 36.5 }}
+				type='submit'
+				variant='contained'
 			>
 				Entrar
 			</Button>
 
 			<Button
-				sx={{ maxHeight: 36.5 }}
-				variant='outlined'
 				fullWidth
 				onClick={() => {
 					setShowAlert(false);
 					resetForm();
 					setState(true);
 				}}
+				sx={{ maxHeight: 36.5 }}
+				variant='outlined'
 			>
 				Cadastre-se
 			</Button>

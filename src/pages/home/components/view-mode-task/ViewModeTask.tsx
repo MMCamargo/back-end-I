@@ -1,10 +1,10 @@
-import { Box, Typography, Button } from '@mui/material';
 import { useAppDispatch } from '../../../../shared/hooks';
 import {
 	handleArchiveTask,
-	handleUnarchiveTask,
 	handleDeleteTask,
+	handleUnarchiveTask,
 } from '../../functions';
+import { Box, Button, Typography } from '@mui/material';
 
 interface IViewModeTaskProps {
 	uid: string;
@@ -14,9 +14,13 @@ interface IViewModeTaskProps {
 	setEditingMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ViewModeTask = (props: IViewModeTaskProps) => {
-	const { uid, title, content, isArchived, setEditingMode } = props;
-
+const ViewModeTask = ({
+	uid,
+	title,
+	content,
+	isArchived,
+	setEditingMode,
+}: IViewModeTaskProps) => {
 	const dispatch = useAppDispatch();
 
 	return (
@@ -29,7 +33,7 @@ const ViewModeTask = (props: IViewModeTaskProps) => {
 					placeItems: 'center',
 				}}
 			>
-				<Typography sx={{ lineHeight: 1 }} fontWeight={'bold'}>
+				<Typography fontWeight={'bold'} sx={{ lineHeight: 1 }}>
 					{title}
 				</Typography>
 			</Box>
@@ -51,10 +55,10 @@ const ViewModeTask = (props: IViewModeTaskProps) => {
 				}}
 			>
 				<Button
-					variant='contained'
 					onClick={() => {
 						setEditingMode(true);
 					}}
+					variant='contained'
 				>
 					Editar
 				</Button>
@@ -62,16 +66,16 @@ const ViewModeTask = (props: IViewModeTaskProps) => {
 				{!isArchived ? (
 					<Button
 						color='error'
-						variant='outlined'
 						onClick={() => handleArchiveTask(uid, dispatch)}
+						variant='outlined'
 					>
 						Arquivar
 					</Button>
 				) : (
 					<Button
 						color='error'
-						variant='outlined'
 						onClick={() => handleUnarchiveTask(uid, dispatch)}
+						variant='outlined'
 					>
 						Desarquivar
 					</Button>
@@ -79,8 +83,8 @@ const ViewModeTask = (props: IViewModeTaskProps) => {
 
 				<Button
 					color='error'
-					variant='contained'
 					onClick={() => handleDeleteTask(uid, dispatch)}
+					variant='contained'
 				>
 					Deletar
 				</Button>

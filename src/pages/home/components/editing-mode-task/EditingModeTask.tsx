@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../../../shared/hooks';
-import { Box, Button } from '@mui/material';
-import { Input, TextArea } from '..';
 import { handleUpdateTask } from '../../functions';
+import { Input, TextArea } from '..';
+import { Box, Button } from '@mui/material';
 
 interface IEditingModeTaskProps {
 	uid: string;
@@ -11,13 +11,16 @@ interface IEditingModeTaskProps {
 	setEditingMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const EditingModeTask = (props: IEditingModeTaskProps) => {
-	const { uid, title, content, setEditingMode } = props;
+const EditingModeTask = ({
+	content,
+	setEditingMode,
+	title,
+	uid,
+}: IEditingModeTaskProps) => {
+	const dispatch = useAppDispatch();
 
 	const [newTitle, setNewTitle] = useState(title);
 	const [newContent, setNewContent] = useState(content);
-
-	const dispatch = useAppDispatch();
 
 	return (
 		<>
@@ -30,18 +33,18 @@ const EditingModeTask = (props: IEditingModeTaskProps) => {
 				}}
 			>
 				<Input
-					placeholder='Título'
 					autoFocus
-					value={newTitle}
 					onChange={(e) => setNewTitle(e.target.value)}
+					placeholder='Título'
+					value={newTitle}
 				/>
 			</Box>
 
 			<Box sx={{ minHeight: 150, p: 2 }}>
 				<TextArea
+					onChange={(e) => setNewContent(e.target.value)}
 					placeholder='Tarefa'
 					value={newContent}
-					onChange={(e) => setNewContent(e.target.value)}
 				/>
 			</Box>
 
@@ -58,16 +61,15 @@ const EditingModeTask = (props: IEditingModeTaskProps) => {
 				}}
 			>
 				<Button
-					variant='outlined'
 					onClick={() => {
 						setEditingMode(false);
 					}}
+					variant='outlined'
 				>
 					Cancelar
 				</Button>
 
 				<Button
-					variant='contained'
 					onClick={() =>
 						handleUpdateTask(
 							uid,
@@ -77,6 +79,7 @@ const EditingModeTask = (props: IEditingModeTaskProps) => {
 							setEditingMode
 						)
 					}
+					variant='contained'
 				>
 					Salvar
 				</Button>

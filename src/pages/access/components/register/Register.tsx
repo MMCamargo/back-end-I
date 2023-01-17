@@ -1,30 +1,30 @@
 import { useRegisterForm } from '../../hooks';
-import { Box, Typography, TextField, Button } from '@mui/material';
 import { ConditionallyRender } from '../../../../shared/components';
+import { Box, Button, TextField, Typography } from '@mui/material';
 
 const Register = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 	const {
-		values,
+		disabledBtn,
 		errors,
-		touched,
+		handleBlur,
+		handleChange,
+		handleSubmit,
 		resetForm,
 		setFieldTouched,
-		handleChange,
-		handleBlur,
-		handleSubmit,
-		showAlert,
 		setShowAlert,
-		disabledBtn,
+		showAlert,
+		touched,
+		values,
 	} = useRegisterForm(setState);
 
 	return (
 		<Box
-			sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
-			component='form'
 			autoComplete='off'
+			component='form'
 			onSubmit={handleSubmit}
+			sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
 		>
-			<Typography variant='h4' align='center'>
+			<Typography align='center' variant='h4'>
 				Cadastro
 			</Typography>
 
@@ -32,9 +32,9 @@ const Register = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 				condition={showAlert}
 				show={
 					<Typography
-						variant='subtitle1'
-						color='error'
 						align='center'
+						color='error'
+						variant='subtitle1'
 					>
 						E-mail já utilizado.
 					</Typography>
@@ -42,86 +42,86 @@ const Register = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 			/>
 
 			<TextField
-				label='Nome'
-				helperText={touched.firstName && errors.firstName}
 				error={errors.firstName && touched.firstName ? true : false}
+				helperText={touched.firstName && errors.firstName}
 				id='firstName'
+				label='Nome'
+				onBlur={handleBlur}
+				onChange={handleChange}
 				value={values.firstName}
-				onChange={handleChange}
-				onBlur={handleBlur}
 			/>
 
 			<TextField
-				label='Sobrenome'
-				helperText={touched.lastName && errors.lastName}
 				error={errors.lastName && touched.lastName ? true : false}
+				helperText={touched.lastName && errors.lastName}
 				id='lastName'
+				label='Sobrenome'
+				onBlur={handleBlur}
+				onChange={handleChange}
 				value={values.lastName}
-				onChange={handleChange}
-				onBlur={handleBlur}
 			/>
 
 			<TextField
-				label='E-mail'
-				helperText={touched.email && errors.email}
 				error={errors.email && touched.email ? true : false}
+				helperText={touched.email && errors.email}
 				id='email'
-				value={values.email}
-				onChange={handleChange}
+				label='E-mail'
 				onBlur={handleBlur}
+				onChange={handleChange}
+				value={values.email}
 			/>
 
 			<TextField
-				label='Senha'
-				helperText={touched.password && errors.password}
 				error={errors.password && touched.password ? true : false}
-				type='password'
+				helperText={touched.password && errors.password}
 				id='password'
-				value={values.password}
+				label='Senha'
+				onBlur={handleBlur}
 				onChange={(e) => {
 					setFieldTouched(e.target.id);
 					handleChange(e);
 				}}
-				onBlur={handleBlur}
+				type='password'
+				value={values.password}
 			/>
 
 			<TextField
-				label='Confirme a senha'
-				helperText={touched.confirmPassword && errors.confirmPassword}
 				error={
 					errors.confirmPassword && touched.confirmPassword
 						? true
 						: false
 				}
-				type='password'
+				helperText={touched.confirmPassword && errors.confirmPassword}
 				id='confirmPassword'
-				value={values.confirmPassword}
+				label='Confirme a senha'
+				onBlur={handleBlur}
 				onChange={(e) => {
 					setFieldTouched(e.target.id);
 					handleChange(e);
 				}}
-				onBlur={handleBlur}
+				type='password'
+				value={values.confirmPassword}
 			/>
 
 			<Button
-				sx={{ maxHeight: 36.5 }}
-				variant='contained'
-				fullWidth
-				type='submit'
 				disabled={disabledBtn}
+				fullWidth
+				sx={{ maxHeight: 36.5 }}
+				type='submit'
+				variant='contained'
 			>
 				Cadastrar
 			</Button>
 
 			<Button
-				sx={{ maxHeight: 36.5 }}
-				variant='outlined'
 				fullWidth
 				onClick={() => {
 					setShowAlert(false);
 					resetForm();
 					setState(false);
 				}}
+				sx={{ maxHeight: 36.5 }}
+				variant='outlined'
 			>
 				Conecte-se
 			</Button>

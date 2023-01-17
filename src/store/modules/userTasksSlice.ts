@@ -1,153 +1,119 @@
+import { doDelete, doGet, doPost, doPut } from '../../services';
+import { BackEndIState } from '../rootReducer';
 import { IDefaultResponse, ITask } from '../../shared/interfaces';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { BackEndIState } from '../rootReducer';
-import { doGet, doPut, doDelete } from '../../services';
+import { AxiosResponse } from 'axios';
+
+type TSearchUserTasksData = { userUid: string; text: string };
 
 const initialState: IDefaultResponse = {
 	success: true,
 };
 
-const userTasksThunk = createAsyncThunk<IDefaultResponse, string>(
-	'/getUserTasks',
-	async (userUid) => {
-		const response: IDefaultResponse = await doGet(
-			`/tasks/user/${userUid}`
-		);
+const createTaskThunk = createAsyncThunk(
+	'task/post',
+	async (data: Partial<ITask>, { dispatch }) => {
+		const response: AxiosResponse = await doPost('/task', data);
 
-		return response;
+		if (response.status !== 201) {
+			return;
+		} else dispatch(getUserTasksThunk(data.userUid!));
 	}
 );
 
-const searchTasksThunk = createAsyncThunk<
-	IDefaultResponse,
-	{ userUid: string; text: string }
->('/searchUserTasks', async ({ userUid, text }) => {
-	const response: IDefaultResponse = await doGet(
-		`/tasks/search/${userUid}?text=${text}`
-	);
+const getUserTasksThunk = createAsyncThunk(
+	'tasks/user/get',
+	async (userUid: string) => {
+		const response: AxiosResponse = await doGet(`/tasks/user/${userUid}`);
 
-	return response;
-});
-
-const archiveTaskThunk = createAsyncThunk<IDefaultResponse, string>(
-	'/archiveTask',
-	async (taskUid, data) => {
-		const response: IDefaultResponse = await doPut(
-			`/task/archiving/${taskUid}`,
-			data
-		);
-
-		return response;
+		if (response.status !== 200) {
+			return;
+		} else return response.data;
 	}
 );
 
-const unarchiveTaskThunk = createAsyncThunk<IDefaultResponse, string>(
-	'/unarchiveTask',
-	async (taskUid, data) => {
-		const response: IDefaultResponse = await doPut(
-			`/task/archiving/${taskUid}`,
-			data
+const searchUserTasksThunk = createAsyncThunk(
+	'tasks/user/search',
+	async ({ userUid, text }: TSearchUserTasksData) => {
+		const response: AxiosResponse = await doGet(
+			`/tasks/search/${userUid}?text=${text}`
 		);
 
-		return response;
+		if (response.status !== 200) {
+			return;
+		} else return response.data;
 	}
 );
 
-const deleteTaskThunk = createAsyncThunk<IDefaultResponse, string>(
+const updateTaskThunk = createAsyncThunk(
+	'task/update',
+	async ({ userUid, uid, title, content }: Partial<ITask>, { dispatch }) => {
+		const response: AxiosResponse = await doPut(`/task/edit/${uid}`, {
+			title,
+			content,
+		});
+
+		if (response.status !== 200) {
+			return;
+		} else return dispatch(getUserTasksThunk(userUid!));
+	}
+);
+
+const toggleArchiveTaskThunk = createAsyncThunk(
+	'task/archive',
+	async ({ userUid, uid }: Partial<ITask>, { dispatch }) => {
+		const response: AxiosResponse = await doPut(`/task/archiving/${uid}`);
+
+		if (response.status !== 200) {
+			return;
+		} else return dispatch(getUserTasksThunk(userUid!));
+	}
+);
+
+const deleteTaskThunk = createAsyncThunk(
 	'/deleteTask',
-	async (taskUid) => {
-		const response = await doDelete(`/task/${taskUid}`);
+	async ({ userUid, uid }: Partial<ITask>, { dispatch }) => {
+		const response: AxiosResponse = await doDelete(`/task/${uid}`);
 
-		return response;
+		if (response.status !== 200) {
+			return;
+		} else return dispatch(getUserTasksThunk(userUid!));
 	}
 );
 
 const userTasksSlice = createSlice({
 	name: 'userTasksSlice',
 	initialState,
-	reducers: {
-		addTask: (state, action) => {
-			state.data.push(action.payload);
-		},
-		updateTask: (state, action) => {
-			const task = state.data.find(
-				(task: ITask) => task.uid === action.payload.uid
-			);
+	reducers: {},
+	extraReducers({ addCase }) {
+		addCase(getUserTasksThunk.fulfilled, (state, { payload }) => {
+			const { success, message, data } = payload;
 
-			task.title = action.payload.title;
-			task.content = action.payload.content;
-		},
-	},
-	extraReducers(builder) {
-		builder
-			.addCase(userTasksThunk.fulfilled, (state, action) => {
-				const { success, message, data } = action.payload;
+			state.success = success;
+			state.message = message;
+			state.data = data;
+		});
 
-				state.success = success;
-				state.message = message;
-				state.data = data;
-			})
-			.addCase(userTasksThunk.rejected, (state, action) => {
-				state.success = false;
-				state.message = action.error.message;
-				state.data = null;
-			})
-			.addCase(searchTasksThunk.fulfilled, (state, action) => {
-				const { success, message, data } = action.payload;
+		addCase(searchUserTasksThunk.fulfilled, (state, { payload }) => {
+			const { success, message, data } = payload;
 
-				state.success = success;
-				state.message = message;
-				state.data = data;
-			})
-			.addCase(searchTasksThunk.rejected, (state, action) => {
-				state.success = false;
-				state.message = action.error.message;
-				state.data = null;
-			})
-			.addCase(deleteTaskThunk.fulfilled, (state, action) => {
-				const { success, message } = action.payload;
-
-				if (success) {
-					state.data = state.data.filter(
-						(task: ITask) => task.uid !== action.meta.arg
-					);
-
-					state.message = message;
-				} else {
-					state.success = false;
-					state.message = message;
-				}
-			})
-			.addCase(archiveTaskThunk.fulfilled, (state, action) => {
-				const { data } = action.payload;
-
-				const archivedTask: ITask = state.data.find(
-					(task: ITask) => task.uid === data.uid
-				);
-
-				archivedTask.isArchived = true;
-			})
-			.addCase(unarchiveTaskThunk.fulfilled, (state, action) => {
-				const { data } = action.payload;
-
-				const archivedTask: ITask = state.data.find(
-					(task: ITask) => task.uid === data.uid
-				);
-
-				archivedTask.isArchived = false;
-			});
+			state.success = success;
+			state.message = message;
+			state.data = data;
+		});
 	},
 });
 
 export {
-	userTasksThunk,
-	searchTasksThunk,
-	archiveTaskThunk,
-	unarchiveTaskThunk,
+	createTaskThunk,
 	deleteTaskThunk,
+	getUserTasksThunk,
+	searchUserTasksThunk,
+	toggleArchiveTaskThunk,
+	updateTaskThunk,
 };
 
-export const { addTask, updateTask } = userTasksSlice.actions;
+export const {} = userTasksSlice.actions;
 
 export const userTasksSliceSelectAll = (state: BackEndIState) =>
 	state.userTasksSlice;

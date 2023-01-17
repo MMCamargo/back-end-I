@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAppDispatch } from '../../../../shared/hooks';
 import { handleSearchTask } from '../../functions';
-import { userTasksThunk } from '../../../../store/modules/userTasksSlice';
+import { getUserTasksThunk } from '../../../../store/modules/userTasksSlice';
 import { IUser } from '../../../../shared/interfaces';
 import { Box, Button, TextField } from '@mui/material';
 
@@ -16,7 +16,7 @@ const SearchTask = () => {
 
 	useEffect(() => {
 		if (!searchText) {
-			dispatch(userTasksThunk(uid!));
+			dispatch(getUserTasksThunk(uid!));
 		}
 	}, [searchText]);
 

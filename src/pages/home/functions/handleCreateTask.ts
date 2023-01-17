@@ -1,7 +1,6 @@
-import { IDefaultResponse, ITask } from '../../../shared/interfaces';
+import { createTaskThunk } from '../../../store/modules/userTasksSlice';
+import { ITask } from '../../../shared/interfaces';
 import { TUseAppDispatch } from '../../../shared/types';
-import { createTaskThunk } from '../../../store/modules/createTaskSlice';
-import { addTask } from '../../../store/modules/userTasksSlice';
 
 const handleCreateTask = async (
 	e: React.FormEvent<HTMLFormElement>,
@@ -13,20 +12,15 @@ const handleCreateTask = async (
 ) => {
 	e.preventDefault();
 
-	const loggedUser = JSON.parse(window.localStorage.getItem('loggedUser')!);
+	const { uid } = JSON.parse(window.localStorage.getItem('loggedUser')!);
+
 	const newTask: Partial<ITask> = {
 		title,
 		content,
-		userUid: loggedUser.uid,
+		userUid: uid,
 	};
 
-	const response = await dispatch(createTaskThunk(newTask));
-
-	if (response.type === createTaskThunk.fulfilled.type) {
-		const { data } = response.payload as IDefaultResponse;
-
-		dispatch(addTask(data));
-	}
+	dispatch(createTaskThunk(newTask));
 
 	setTitle('');
 	setContent('');

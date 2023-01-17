@@ -1,15 +1,8 @@
-import {
-	createTaskSlice,
-	loggedUserSlice,
-	updateTaskSlice,
-	userTasksSlice,
-} from './modules';
+import { loggedUserSlice, userTasksSlice } from './modules';
 import { combineReducers } from '@reduxjs/toolkit';
 
 const reducers = {
-	createTaskSlice,
 	loggedUserSlice,
-	updateTaskSlice,
 	userTasksSlice,
 };
 

@@ -1,9 +1,5 @@
 import { useAppDispatch } from '../../../../shared/hooks';
-import {
-	handleArchiveTask,
-	handleDeleteTask,
-	handleUnarchiveTask,
-} from '../../functions';
+import { handleDeleteTask, handleToggleArchiveTask } from '../../functions';
 import { Box, Button, Typography } from '@mui/material';
 
 interface IViewModeTaskProps {
@@ -66,7 +62,7 @@ const ViewModeTask = ({
 				{!isArchived ? (
 					<Button
 						color='error'
-						onClick={() => handleArchiveTask(uid, dispatch)}
+						onClick={() => handleToggleArchiveTask(uid, dispatch)}
 						variant='outlined'
 					>
 						Arquivar
@@ -74,7 +70,7 @@ const ViewModeTask = ({
 				) : (
 					<Button
 						color='error'
-						onClick={() => handleUnarchiveTask(uid, dispatch)}
+						onClick={() => handleToggleArchiveTask(uid, dispatch)}
 						variant='outlined'
 					>
 						Desarquivar

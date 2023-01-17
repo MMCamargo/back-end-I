@@ -1,24 +1,26 @@
-import { IDefaultResponse } from '../../../shared/interfaces';
+import { updateTaskThunk } from '../../../store/modules/userTasksSlice';
+import { ITask } from '../../../shared/interfaces';
 import { TUseAppDispatch } from '../../../shared/types';
-import { updateTaskThunk } from '../../../store/modules/updateTaskSlice';
-import { updateTask } from '../../../store/modules/userTasksSlice';
 
 const handleUpdateTask = async (
-	uid: string,
+	taskUid: string,
 	title: string,
 	content: string,
 	dispatch: TUseAppDispatch,
 	setEditingMode: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-	const response = await dispatch(updateTaskThunk({ uid, title, content }));
+	const { uid } = JSON.parse(window.localStorage.getItem('loggedUser')!);
 
-	if (response.type === updateTaskThunk.fulfilled.type) {
-		const { data } = response.payload as IDefaultResponse;
+	const task: Partial<ITask> = {
+		userUid: uid,
+		uid: taskUid,
+		title,
+		content,
+	};
 
-		dispatch(updateTask(data));
+	dispatch(updateTaskThunk(task));
 
-		setEditingMode(false);
-	}
+	setEditingMode(false);
 };
 
 export default handleUpdateTask;

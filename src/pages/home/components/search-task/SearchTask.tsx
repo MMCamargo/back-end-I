@@ -21,7 +21,7 @@ const SearchTask = () => {
 	}, [searchText]);
 
 	return (
-		<Box>
+		<Box sx={{ display: 'flex', gap: 2 }}>
 			<TextField
 				label='Pesquisar'
 				onChange={(e) => setSearchText(e.target.value)}
@@ -29,7 +29,11 @@ const SearchTask = () => {
 				value={searchText}
 				variant='outlined'
 			/>
-			<Button onClick={() => handleSearchTask(searchText, dispatch)}>
+			<Button
+				disabled={!!searchText ? false : true}
+				onClick={() => handleSearchTask(searchText, dispatch)}
+				variant='contained'
+			>
 				Pesquisar
 			</Button>
 		</Box>

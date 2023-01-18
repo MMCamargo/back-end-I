@@ -8,7 +8,9 @@ const LogoutBtn = () => {
 	const navigate = useNavigate();
 
 	return (
-		<Button onClick={() => handleLogout(dispatch, navigate)}>Sair</Button>
+		<Button onClick={() => handleLogout(dispatch, navigate)} size='large'>
+			Sair
+		</Button>
 	);
 };
 

@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../shared/hooks';
 import { setLoggedUser } from '../../../store/modules/loggedUserSlice';
 import { doPost } from '../../../services';
-import { IUser, IDefaultResponse } from '../../../shared/interfaces';
+import { IUser } from '../../../shared/interfaces';
+import { AxiosResponse } from 'axios';
 import { useFormik } from 'formik';
 
 function useLoginForm() {
@@ -18,13 +19,10 @@ function useLoginForm() {
 		async onSubmit({ email, password }) {
 			const data: Partial<IUser> = { email, password };
 
-			const response: IDefaultResponse = await doPost(
-				'/user/login',
-				data
-			);
+			const response: AxiosResponse = await doPost('/user/login', data);
 
-			if (!response.success) {
-				if (response.message === 'Dados inválidos.') {
+			if (!response.data.success) {
+				if (response.data.message === 'Dados inválidos.') {
 					setDisabledBtn(true);
 					setShowAlert(true);
 
@@ -37,7 +35,7 @@ function useLoginForm() {
 				}
 			}
 
-			dispatch(setLoggedUser(response.data));
+			dispatch(setLoggedUser(response.data.data));
 			resetForm();
 			navigate('/home');
 		},

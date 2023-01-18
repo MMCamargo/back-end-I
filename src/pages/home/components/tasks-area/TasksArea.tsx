@@ -18,17 +18,20 @@ const TasksArea = ({ tasks }: ITasksAreaProps) => {
 	const [showArchiveds, setShowArchiveds] = useState(false);
 
 	return (
-		<Box sx={{ display: 'grid', gap: 2 }}>
+		<Box sx={{ display: 'grid', gap: 2, paddingY: 2 }}>
 			<Box
 				sx={{
 					display: 'flex',
 					gap: 2,
+					alignItems: 'start',
 					justifyContent: 'space-between',
 				}}
 			>
-				<NewTaskForm />
+				<Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+					<NewTaskForm />
 
-				<SearchTask />
+					<SearchTask />
+				</Box>
 
 				<ShowArchivedsBtn
 					setState={setShowArchiveds}

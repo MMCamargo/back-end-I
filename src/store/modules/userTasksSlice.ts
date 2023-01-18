@@ -17,7 +17,7 @@ const createTaskThunk = createAsyncThunk(
 
 		if (response.status !== 201) {
 			return;
-		} else dispatch(getUserTasksThunk(data.userUid!));
+		} else return dispatch(getUserTasksThunk(data.userUid!));
 	}
 );
 

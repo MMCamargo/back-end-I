@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiEndPoint = 'http://localhost:8081';
+const apiEndPoint = 'https://back-end-i-api.vercel.app/';
 
 const instance = axios.create({
 	baseURL: apiEndPoint,

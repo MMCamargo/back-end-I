@@ -12,6 +12,7 @@ const ArchivedTaskList = ({ tasks }: IArchivedTaskListProps) => {
 			{tasks &&
 				tasks
 					.filter(({ isArchived }) => isArchived)
+					.reverse()
 					.map(({ content, title, uid }) => (
 						<Task
 							content={content}

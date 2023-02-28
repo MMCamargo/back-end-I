@@ -22,7 +22,7 @@ function useLoginForm() {
 			const response: AxiosResponse = await doPost('/user/login', data);
 
 			if (!response.data.success) {
-				if (response.data.message === 'Dados inválidos.') {
+				if (response.data.message === 'Not found.') {
 					setDisabledBtn(true);
 					setShowAlert(true);
 

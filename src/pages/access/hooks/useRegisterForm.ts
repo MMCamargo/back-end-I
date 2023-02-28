@@ -36,7 +36,7 @@ function useRegisterForm(
 			const response: IDefaultResponse = await doPost('/user', data);
 
 			if (!response.success) {
-				if (response.message === 'E-mail já utilizado.') {
+				if (response.message === 'Email already registered.') {
 					setDisabledBtn(true);
 					setShowAlert(true);
 

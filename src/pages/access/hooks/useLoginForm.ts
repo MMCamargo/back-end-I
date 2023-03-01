@@ -19,7 +19,7 @@ function useLoginForm() {
 		async onSubmit({ email, password }) {
 			const data: Partial<IUser> = { email, password };
 
-			const response: AxiosResponse = await doPost('/user/login', data);
+			const response: AxiosResponse = await doPost('/login', data);
 
 			if (!response.data.success) {
 				if (response.data.message === 'Not found.') {

@@ -24,7 +24,7 @@ const createTaskThunk = createAsyncThunk(
 const getUserTasksThunk = createAsyncThunk(
 	'tasks/user/get',
 	async (userUid: string) => {
-		const response: AxiosResponse = await doGet(`/tasks/user/${userUid}`);
+		const response: AxiosResponse = await doGet(`/tasks/${userUid}`);
 
 		if (response.status !== 200) {
 			return;

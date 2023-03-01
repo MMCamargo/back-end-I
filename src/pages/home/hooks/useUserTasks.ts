@@ -16,7 +16,7 @@ const useUserTasks = () => {
 		);
 
 		if (!!loggedUser) {
-			dispatch(getUserTasksThunk(loggedUser.uid));
+			dispatch(getUserTasksThunk(loggedUser.userUid));
 		}
 	}, [dispatch]);
 

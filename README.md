@@ -48,7 +48,7 @@ You can access the live site [here](http://mm-back-end-i.vercel.app) or start th
 npm run dev
 ```
 
-*** Please note that certain features may not function correctly due to the constraints of the integrated database. ***
+***Please note that certain features may not function correctly due to the constraints of the integrated database.***
 
 ## Contributing
 

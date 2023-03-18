@@ -31,7 +31,7 @@ The technologies used in this project include:
 To use the project in this repository, clone it to your local machine using the following command:
 
 ```bash
-git clone https://github.com/mmcamargo/back-end-I.git
+git clone https://github.com/mmcamargo/back-end-I-interface.git
 ```
 
 Install the dependencies:

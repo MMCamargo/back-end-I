@@ -34,19 +34,20 @@ function useRegisterForm(
 			};
 
 			const response: IDefaultResponse = await doPost('/user', data);
+			console.log(response);
 
 			if (!response.success) {
-				if (response.message === 'Email already registered.') {
-					setDisabledBtn(true);
-					setShowAlert(true);
+				console.error(response.data.message);
 
-					setTimeout(() => {
-						setDisabledBtn(false);
-						setShowAlert(false);
-					}, 3000);
+				setDisabledBtn(true);
+				setShowAlert(true);
 
-					return;
-				}
+				setTimeout(() => {
+					setDisabledBtn(false);
+					setShowAlert(false);
+				}, 3000);
+
+				return;
 			}
 
 			resetForm();

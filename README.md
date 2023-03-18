@@ -15,7 +15,7 @@ This repository contains the front-end portion of a web application developed as
 
 ## Description
 
-This repository contains the front-end of a web application developed as a requirement for the Back-end I module. Although the primary objective was not the design, the application was designed to efficiently consume [this](https://github.com/mmcamargo/back-end-I-api) API developed in parallel while maintaining a well-structured code.
+This repository contains the front-end of a web application developed as a requirement for the Back-end I module. Although the primary objective was not the design, the application was designed to consume [this](https://github.com/mmcamargo/back-end-I-api) API developed in parallel while maintaining a well-structured code.
 
 ## Technologies
 
@@ -42,13 +42,13 @@ npm install
 
 ## Usage
 
-You can access the live site [here](http://mm-back-end-i-interface.vercel.app) or start the development server after installation:
+Start the development server after installation:
 
 ```bash
 npm run dev
 ```
 
-***Please note that certain features may not function correctly due to the constraints of the integrated database.***
+**Please note that certain features may not function correctly after changes in the API.**
 
 ## Contributing
 

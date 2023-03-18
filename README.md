@@ -1,10 +1,10 @@
-# Back-end I
+# Back-end I Interface
 
 This repository contains the front-end portion of a web application developed as part of the Back-end I module at [Growdev](https://www.growdev.com.br/).
 
 ## Table of Contents
 
--   [Back-end I](#back-end-i)
+-   [Back-end I Interface](#back-end-i-interface)
     -   [Table of Contents](#table-of-contents)
     -   [Description](#description)
     -   [Technologies](#technologies)
@@ -42,7 +42,7 @@ npm install
 
 ## Usage
 
-You can access the live site [here](http://mm-back-end-i.vercel.app) or start the development server after installation:
+You can access the live site [here](http://mm-back-end-i-interface.vercel.app) or start the development server after installation:
 
 ```bash
 npm run dev
